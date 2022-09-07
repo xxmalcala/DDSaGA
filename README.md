@@ -10,7 +10,7 @@ It takes FASTA DNA sequence as input, writing out tab-separated value tables sum
 [Python 3.6+](https://www.python.org/downloads/)\
 [BioPython](https://biopython.org/wiki/Download)\
 [BLAST 2.12+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=Download)\
-[EMBOSS](http://emboss.sourceforge.net/)
+[EMBOSS](http://emboss.sourceforge.net/)\
 [CD-HIT](https://github.com/weizhongli/cdhit)
 
 ## Usage
