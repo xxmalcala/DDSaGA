@@ -20,10 +20,9 @@ $ python3 GS.py transcriptome --help
 $ python3 GS.py genome --help
 ```
 
-## Planned Updates
--   GFF3 outputs
--   Options for Visualization of Germ-Soma Architecture
--   Conda packaging!
+## Planned Updates (V2)
+- [ ] Output MDSs in GFF3 (intended for use with [IGV](https://software.broadinstitute.org/software/igv/) or similar software)
+- [ ] Conda packaging!
 
 ### When using the tool in published research, please cite:
 
