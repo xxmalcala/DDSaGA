@@ -10,7 +10,7 @@ more complete definitions see Maurer-Alcalá et al. 2018 (mBio).'''
 
 ##__Updated__: 2020-12-16
 ##__Author__: Xyrus X. Maurer-Alcalá
-##__e-mail__: maurerax@gmail.com; xyrus.maurer-alcala@izb.unibe.ch
+##__e-mail__: maurerax@gmail.com; xmaurer-alcala@amnh.org
 
 import sys
 
@@ -127,17 +127,20 @@ def categorizeLoci(tsv_file, perc_len=0.6):
 # Generates .tsv files with the temporarily categorized germ-soma loci
 # These are templates for the alignment step (if the flag is set to run!),
 # which will clean these data further!
+
+# BUG-FIX (to-do) --- XXMA 09-22
+# Other issues to fix: issue with output coordinates and indels, NSC outputs are
+# not easy for inexperienced, merge multi-loc with scrambled (add notes column).
 def convertToDF(germ_arch, tsv_file):
     # Header for the tables
-    header = ['Soma', 'Germ', 'ID', 'Aln','S_start', 'S_end',
-        'G_start', 'G_end']
+    header = f'Soma\tGerm\tID\tAln\tS_start\tS_end\tG_start\tG_end\n'
 
     # Quick formatting prep for each of the spreadsheets to generate
-    temp_sgl = [k+'\t'+v for k, v in germ_arch['single'].items()]
-    temp_nsc = [k+'\t'+i for k, v in germ_arch['nonscrambled'].items() for i in v]
-    temp_sc = [k+'\t'+i for k, v in germ_arch['scrambled'].items() for i in v]
-    temp_ml = [k+'\t'+i for k, v in germ_arch['multiloc'].items() for i in v]
-    temp_bp = [k+'\t'+i for k, v in germ_arch['bad-pointer'].items() for i in v]
+    temp_sgl = [f'{k}\t{v}' for k, v in germ_arch['single'].items()]
+    temp_nsc = [f'{k}\t{i}' for k, v in germ_arch['nonscrambled'].items() for i in v]
+    temp_sc = [f'{k}\t{i}' for k, v in germ_arch['scrambled'].items() for i in v]
+    temp_ml = [f'{k}\t{i}' for k, v in germ_arch['multiloc'].items() for i in v]
+    temp_bp = [f'{k}\t{i}' for k, v in germ_arch['bad-pointer'].items() for i in v]
 
     sgl_tsv_out = tsv_file.replace('Master','Categorized').split('MASTER')[0]\
         +'SingleMDS.tsv'
@@ -147,21 +150,21 @@ def convertToDF(germ_arch, tsv_file):
     bp_tsv_out = sgl_tsv_out.replace('SingleMDS','BadPointers')
 
     with open(sgl_tsv_out,'w+') as v:
-        v.write('\t'.join(header)+'\n')
+        v.write(header)
         v.write('\n'.join(temp_sgl))
 
     with open(nsc_tsv_out,'w+') as w:
-        w.write('\t'.join(header)+'\n')
+        w.write(header)
         w.write('\n'.join(temp_nsc))
 
     with open(sc_tsv_out,'w+') as x:
-        x.write('\t'.join(header)+'\n')
+        x.write(header)
         x.write('\n'.join(temp_sc))
 
     with open(ml_tsv_out,'w+') as y:
-        y.write('\t'.join(header)+'\n')
+        y.write(header)
         y.write('\n'.join(temp_ml))
 
     with open(bp_tsv_out,'w+') as z:
-        z.write('\t'.join(header)+'\n')
+        z.write(header)
         z.write('\n'.join(temp_bp))
